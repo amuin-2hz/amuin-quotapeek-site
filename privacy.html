@@ -23,7 +23,7 @@
     <section class="legal-hero">
       <p class="kicker">Privacy policy</p>
       <h1>Quota Peek stores monitor data locally and connects directly to provider billing endpoints.</h1>
-      <p class="lead">Last updated: 2026-06-26</p>
+      <p class="lead">Last updated: 2026-07-14</p>
     </section>
 
     <section class="legal-card">
@@ -50,8 +50,49 @@
     </section>
 
     <section class="legal-card">
+      <h2>Optional Codex integration</h2>
+      <p>The Codex integration is off by default. When enabled, Quota Peek first queries the locally installed Codex CLI app-server for subscription quota information without receiving its OAuth token.</p>
+      <p>Users may separately enable an experimental local fallback. It reads only the access token and account ID from the local Codex <code>auth.json</code> file and sends a quota request directly to <code>https://chatgpt.com/backend-api/wham/usage</code>. It never reads or refreshes the refresh token and does not copy or modify the file.</p>
+      <p>Codex credentials are used temporarily in memory. They are not saved or logged, and they are not sent to Amuin or the Quota Peek developer. The local cache contains normalized quota values, reset times, optional credits, refresh time, data source, and sanitized status only.</p>
+      <p>Users can disable the integration or use “Disable and clear cache” in Experimental Features to remove local Codex quota data and withdraw fallback consent.</p>
+    </section>
+
+    <section class="legal-card">
+      <h2>Optional Claude integration</h2>
+      <p>The Claude integration is off by default and is used only to monitor subscription quota. When enabled, Quota Peek reads only the Claude Code OAuth access token from its local Windows Credential Manager entry or credentials file and sends a quota request directly to <code>https://api.anthropic.com/api/oauth/usage</code>. It does not read prompts, responses, conversations, source code, or project files.</p>
+      <p>If the OAuth quota request is unavailable, Quota Peek may run the locally installed Claude Code executable with <code>/usage</code> and parse only quota percentages and reset times. It does not persist the command transcript.</p>
+      <p>Claude credentials are used temporarily in memory. They are not saved or logged, and they are not sent to Amuin or the Quota Peek developer. The local cache contains only normalized quota values, reset times, refresh time, data source, and sanitized status.</p>
+      <p>Users can disable the integration or use “Disable and clear cache” in Experimental Features to remove local Claude quota data without changing Claude Code authentication data.</p>
+    </section>
+
+    <section class="legal-card">
+      <h2>Optional AI Agent status Hooks</h2>
+      <p>AI Agent status monitoring remains disabled until the user installs a Quota Peek Hook for the corresponding local Agent. Before installing, repairing, or uninstalling a Hook, Quota Peek shows the exact target path, lifecycle events, commands, backup behavior, local status path, stored fields, purpose, and privacy boundary, then waits for explicit confirmation. Cancelling the dialog does not write a file or create a backup.</p>
+      <p>The Hook targets are <code>%USERPROFILE%\.codex\hooks.json</code> for Codex and <code>%USERPROFILE%\.claude\settings.json</code> for Claude. Existing third-party Hook entries are preserved. Quota Peek adds, replaces, or removes only commands carrying its owned <code>--source quotapeek-agent-status</code> marker and creates a timestamped sibling backup before changing an existing settings file.</p>
+      <p>The Hook receiver stores only the Agent name, hashed task ID, state, event name, and timestamp in the app's local data directory. This information is used only to display running, waiting, completed, and idle states. An Agent without a fully installed Quota Peek Hook is not monitored or shown.</p>
+      <p>Quota Peek does not store prompts, replies, tool arguments, raw Hook payloads, credentials, authentication files, source code, or project contents, and it does not send Agent status records to Amuin or the Quota Peek developer.</p>
+      <p>Uninstalling a Hook removes only Quota Peek-owned commands. Existing local status records remain until the user selects “Reset status,” but they are not monitored or displayed after the Hook is removed.</p>
+    </section>
+
+    <section class="legal-card">
       <h2>Retention</h2>
       <p>Configuration data and stored snapshots remain on the local device until the user deletes them or removes the app.</p>
+    </section>
+
+    <section class="legal-card">
+      <h2>API keys</h2>
+      <p>API keys are stored on the user's device using Windows protected storage and are used only for the corresponding provider queries configured by the user.</p>
+    </section>
+
+    <section class="legal-card">
+      <h2>Data sharing</h2>
+      <p>Quota Peek does not sell personal data and does not include analytics, telemetry, cloud sync, or an Amuin-operated relay in the current release.</p>
+    </section>
+
+    <section class="legal-card">
+      <h2>Deleting data</h2>
+      <p>Users can delete accounts in the app to remove their local configuration, related snapshots, and saved secret references. Users can also disable Codex or Claude integrations and clear their managed monitors, cached quota snapshots, and local consent without changing Codex or Claude authentication data.</p>
+      <p>Uninstalling the app removes the installed application package. Remaining local app data can also be cleared from Windows app settings.</p>
     </section>
 
     <section class="legal-card">
